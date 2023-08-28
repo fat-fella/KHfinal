@@ -45,7 +45,7 @@ public class BoardController {
 		
 		vo.setMid("jiin0960");
 		
-		int result; //1: 글 등록 성공, 0: 글 등록 실패
+		int result;
 		try {
 			result = boardService.insert(vo);
 			if(result < 1) {
