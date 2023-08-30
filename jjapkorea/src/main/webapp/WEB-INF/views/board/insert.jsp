@@ -79,15 +79,8 @@
         내용: <textarea rows="10" cols="50" name="bcontent"></textarea>
         <br>
         <input type="file" name="uploadFile1">
-        <input type="file" name="uploadFile2">
-        <input type="file" name="uploadFile">
-        <input type="file" name="uploadFile">
-        <input type="file" name="uploadFile">
         <input type="checkbox" name="hobby" value="a">a<br>
-        <input type="checkbox" name="hobby" value="b">b<br>
-        <input type="checkbox" name="hobby" value="c">c<br>
         <button type="submit" id="btn-board-insert">글 등록</button>
-        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf. }">
 	    <button type="button" id="btn-board-list">글목록으로 이동</button>
     </form>
 </div>

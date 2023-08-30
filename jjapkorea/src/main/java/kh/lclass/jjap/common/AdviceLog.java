@@ -37,7 +37,7 @@ public class AdviceLog {
 		robj = pjp.proceed();
 		stopwatch.stop();
 		
-		logger.debug("-[ Dao - "+stopwatch.getTotalTimeMillis()+"초 ]= "+robj);
+		logger.debug("-[ Dao 포인트컷 - "+stopwatch.getTotalTimeMillis()+"밀리초 ]= "+robj);
 		return robj;
 		
 	}
@@ -50,7 +50,7 @@ public class AdviceLog {
 		}
 		Object robj = null;
 		robj = pjp.proceed();
-		logger.debug("--[ Srv-- ]= "+robj);
+		logger.debug("--[ 서비스 포인트 컷-- ]= "+robj);
 		return robj;
 		
 	}
@@ -63,7 +63,7 @@ public class AdviceLog {
 		}
 		Object robj = null;
 		robj = pjp.proceed();
-		logger.debug("---[ Ctr--- ]= "+robj);
+		logger.debug("---[ 컨트롤러 포인트 컷--- ]= "+robj);
 		return robj;
 		
 	}

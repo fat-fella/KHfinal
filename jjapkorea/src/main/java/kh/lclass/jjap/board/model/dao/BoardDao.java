@@ -19,9 +19,9 @@ public class BoardDao {
 		return sqlSession.selectOne("board.selectOne", bno);
 	}
 	public BoardVo insert(BoardVo vo) throws Exception{
-		System.out.println("[insert before] +vo");
+		System.out.println("[insert before]"+vo);
 		int result = sqlSession.insert("board.insert", vo);
-		System.out.println("[insert after] +vo");
+		System.out.println("[insert after]"+vo);
 		return vo;
 	}
 	public int update(BoardVo vo) throws Exception{
