@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Component
 public class BoardVo {
-	private int bno;
+	private Integer bno;
 	private String btitle;
 	private String bcontent;
 	private String bwriteDate;

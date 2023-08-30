@@ -15,7 +15,7 @@ public class BoardDao {
 	public List<BoardVo> selectList() throws Exception{ 
 		return sqlSession.selectList("board.selectList");
 	}
-	public BoardVo selectOne(int bno) throws Exception{
+	public BoardVo selectOne(Integer bno) throws Exception{
 		return sqlSession.selectOne("board.selectOne", bno);
 	}
 	public BoardVo insert(BoardVo vo) throws Exception{

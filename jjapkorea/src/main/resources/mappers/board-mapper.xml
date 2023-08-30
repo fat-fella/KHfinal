@@ -4,7 +4,7 @@
 	<select id="selectList" resultType="BoardVo">
 		select * from board
 	</select>
-	<select id="selectOne" resultType="BoardVo" parameterType="_int">
+	<select id="selectOne" resultType="BoardVo" parameterType="java.lang.Integer">
 		select * from board where bno=#{bno}
 	</select>
 	<insert id="insert" parameterType="BoardVo">

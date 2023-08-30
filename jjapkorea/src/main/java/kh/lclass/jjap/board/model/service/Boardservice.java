@@ -10,14 +10,14 @@ import kh.lclass.jjap.board.model.dao.BoardDao;
 import kh.lclass.jjap.board.model.vo.BoardVo;
 
 @Service
-public class Boardservice {
+public class BoardService {
 	@Autowired
 	private BoardDao boardDao; 
 	
 	public List<BoardVo> selectList() throws Exception{
 		return boardDao.selectList();
 	}
-	public BoardVo selectOne(int bno) throws Exception{
+	public BoardVo selectOne(Integer bno) throws Exception{
 		return boardDao.selectOne(bno);
 	}
 	

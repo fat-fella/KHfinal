@@ -106,12 +106,7 @@ body {
         <c:forEach items="${boardList }" var="vo">
             <tr>
                 <td>${vo.bno }</td>
-                <td>
-                    <a href="<c:url value='/board/read'/>?bno=${vo.bno }">
-                        <c:forEach begin="1" end="${vo.breLevel }">&#8618; </c:forEach>
-                        ${vo.btitle }
-                    </a>
-                </td>
+                <td>${vo.btitle }</td>
                 <td>${vo.mid }</td>
                 <td>${vo.bwriteDate }</td>
             </tr>

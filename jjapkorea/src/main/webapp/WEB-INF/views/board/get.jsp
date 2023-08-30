@@ -4,11 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BoardOne</title>
 </head>
 <body>
-<h2> Board One </h2>
-
-[[${boardOne }]]
+<h2> 보드 일 </h2>
+<hr>
+[[
+${boardVo}
+]]
 </body>
 </html>

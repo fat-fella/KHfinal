@@ -69,17 +69,15 @@
 	}
 </script>
 <div>
-    <form action="${pageContext.request.contextPath }/board/insert" method="post"
-            enctype="multipart/form-data" >
-        <c:if test="${not empty bno }">
-            <input type="hidden" name="bno" value="${bno }">
-        </c:if>
+    <form action="${pageContext.request.contextPath }/board/insert" method="post" enctype="multipart/form-data" >
         제목: <input type="text" name="btitle">
         <br>
         내용: <textarea rows="10" cols="50" name="bcontent"></textarea>
         <br>
-        <input type="file" name="uploadFile1">
-        <input type="checkbox" name="hobby" value="a">a<br>
+		<!--         
+		<input type="file" name="uploadFile1">
+        <input type="checkbox" name="hobby" value="a">삼겹살?<br>
+        -->
         <button type="submit" id="btn-board-insert">글 등록</button>
 	    <button type="button" id="btn-board-list">글목록으로 이동</button>
     </form>
