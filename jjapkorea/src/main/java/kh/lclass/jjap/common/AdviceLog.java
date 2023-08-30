@@ -25,45 +25,42 @@ public class AdviceLog {
 	@Around("daoPointCut()")
 	public Object aroundDaoLog(ProceedingJoinPoint pjp) throws Throwable {
 		logger.debug("["+pjp.getThis()+":"+pjp.getSignature().getName()+"]");
-
 		Object[] args = pjp.getArgs();
 		for(int i = 0; i<args.length; i++) {
-			logger.debug("-args["+i+"] "+args[i]+"");
+			logger.debug("▷args["+i+"] "+args[i]+"");
 		}
-		
-		Object robj = null;
+		Object robj = null; // 타겟메소드로부터 return 값을 받아 저장할 공간
 		StopWatch stopwatch = new StopWatch();
 		stopwatch.start();
-		robj = pjp.proceed();
+		robj = pjp.proceed(); // 타겟메소드 실행 !!! Around 중요메소드
 		stopwatch.stop();
 		
-		logger.debug("-[ Dao 포인트컷 - "+stopwatch.getTotalTimeMillis()+"밀리초 ]= "+robj);
-		return robj;
+		logger.debug("▷[ Dao 포인트컷! ▷ "+stopwatch.getTotalTimeMillis()+"밀리초 ] = "+robj);
+		return robj; // 타겟메소드를 호출한 메소드에 return함
 		
 	}
 	@Around("servicePointCut()")
 	public Object aroundSrvLog(ProceedingJoinPoint pjp) throws Throwable {
-		logger.debug("["+pjp.getThis()+":"+pjp.getSignature().getName()+"]");
+		logger.debug("▷▷["+pjp.getThis()+":"+pjp.getSignature().getName()+"]");
 		Object[] args = pjp.getArgs();
-		for(int i = 0; i<args.length; i++) {
-			logger.debug("--args["+i+"] "+args[i]+"");
+		for(int i=0; i<args.length; i++) {
+			logger.debug("▷▷-args["+i+"] "+args[i]+"");
 		}
 		Object robj = null;
 		robj = pjp.proceed();
-		logger.debug("--[ 서비스 포인트 컷-- ]= "+robj);
+		logger.debug("▷▷[서비스 포인트 컷! ▷▷]"+robj);
 		return robj;
-		
 	}
 	@Around("controllerPointCut()")
 	public Object aroundCtrLog(ProceedingJoinPoint pjp) throws Throwable {
 		logger.debug("["+pjp.getThis()+":"+pjp.getSignature().getName()+"]");
 		Object[] args = pjp.getArgs();
 		for(int i = 0; i<args.length; i++) {
-			logger.debug("---args["+i+"] "+args[i]+"");
+			logger.debug("▷▷▷args["+i+"] "+args[i]+"");
 		}
 		Object robj = null;
 		robj = pjp.proceed();
-		logger.debug("---[ 컨트롤러 포인트 컷--- ]= "+robj);
+		logger.debug("▷▷▷[ 컨트롤러 포인트 컷! ▷▷▷ ]= "+robj);
 		return robj;
 		
 	}
