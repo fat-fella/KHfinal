@@ -1,6 +1,5 @@
 package kh.lclass.jjap.board.model.vo;
 
-import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -9,7 +8,7 @@ import lombok.Data;
 @Data
 @Component
 public class BoardVo {
-	private Integer bno;
+	private int bno;
 	private String btitle;
 	private String bcontent;
 	private String bwriteDate;

@@ -4,13 +4,18 @@
 	<select id="selectList" resultType="BoardVo">
 		select * from board
 	</select>
-	<select id="selectOne" resultType="BoardVo" parameterType="java.lang.Integer">
-		select * from board where bno=#{bno}
+	<select id="selectOne" resultType="BoardVo" parameterType="_int">
+		select * from board where bno=#{bno} order by BREF desc
 	</select>
+	
 	<insert id="insert" parameterType="BoardVo">
 		<selectKey keyProperty="bno" resultType="_int" order="BEFORE">
-			select SEQ_BOARD_BNO.nextVal nextval from dual;
+		select SEQ_BOARD_BNO.nextval nextval from dual
 		</selectKey>
-		insert into board values(#{bno}, #{btitle}, #{bcontent}, default, #{mid}, #{bno}, 0, 0)
+		insert into BOARD values (#{bno}, #{btitle}, #{bcontent}, default, #{mid},#{bno}, 0,0)
 	</insert>
+	
+	<update id="update" parameterType="BoardVo">
+		update board set btitle=#{btitle}, bcontent=#{bcontent} where bno=#{bno}
+	</update>
 </mapper>

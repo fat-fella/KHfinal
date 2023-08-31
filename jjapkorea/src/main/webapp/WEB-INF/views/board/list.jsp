@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board</title>
+<title>boardList</title>
 <style>
 body {
     background-color: #f9f9f9;
@@ -106,7 +106,12 @@ body {
         <c:forEach items="${boardList }" var="vo">
             <tr>
                 <td>${vo.bno }</td>
-                <td>${vo.btitle }</td>
+                <td>
+                   <a href="<c:url value='/board/get'/>?bno=${vo.bno }">
+                   		<c:forEach begin="1" end="${vo.breLevel }">&#8618; </c:forEach>
+                        ${vo.btitle }
+                   </a>
+                </td>
                 <td>${vo.mid }</td>
                 <td>${vo.bwriteDate }</td>
             </tr>

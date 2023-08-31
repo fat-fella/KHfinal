@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>boardInsert</title>
+<title>boardUpdate</title>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <style>
     body {
@@ -20,7 +19,7 @@
         margin-top: 20px;
     }
 
-    div {
+    form {
         max-width: 600px;
         margin: 0 auto;
         padding: 20px;
@@ -40,8 +39,8 @@
         resize: vertical;
     }
 
-    form button[type="submit"],
-    form button[type="button"] {
+    form input[type="submit"],
+    form button {
         padding: 10px 20px;
         background-color: #007bff;
         border: none;
@@ -50,12 +49,7 @@
         cursor: pointer;
     }
 
-    form button[type="button"] {
-        background-color: #ccc;
-        margin-left: 10px;
-    }
-    
-    #btn-board-list {
+    form button#btn-board-list {
         background-color: #ccc;
         margin-left: 10px;
     }
@@ -68,22 +62,22 @@
 		alert(msg);
 	}
 </script>
-<div>
-    <form action="${pageContext.request.contextPath }/board/insert" method="post" enctype="multipart/form-data" >
-        제목: <input type="text" name="btitle">
-        <br>
-        내용: <textarea rows="10" cols="50" name="bcontent"></textarea>
-        <br>         
-		<input type="file" name="uploadFile1">
-        <input type="checkbox" name="hobby" value="a">삼겹살?<br>
-        <button type="submit" id="btn-board-insert">글 등록</button>
-	    <button type="button" id="btn-board-list">글목록으로 이동</button>
-    </form>
-</div>
-<script>
-	$("#btn-board-list").click(function(){
-		location.href="${pageContext.request.contextPath}/board/list";
-	});
+<h2>글 수정</h2>
+<form action="${pageContext.request.contextPath }/board/update" method="post">
+    <%-- <input type="hidden" name="bno" value="${dto.bno}"> --%>
+    
+    제목: <input type="text" name="btitle" value="${dto.btitle}">
+    <br>
+    내용: <textarea rows="10" cols="50" name="bcontent">${dto.bcontent}</textarea>
+    <br>
+    <input type="submit" value="수정">
+    <button type="button" id="btn-board-list">메인으로</button>
+</form>
+
+<script>   
+$("#btn-board-list").click(function(){
+    location.href="${pageContext.request.contextPath}/board/list";
+});    
 </script>
 </body>
 </html>

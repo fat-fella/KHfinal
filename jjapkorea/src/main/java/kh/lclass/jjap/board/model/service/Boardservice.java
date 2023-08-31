@@ -17,10 +17,9 @@ public class BoardService {
 	public List<BoardVo> selectList() throws Exception{
 		return boardDao.selectList();
 	}
-	public BoardVo selectOne(Integer bno) throws Exception{
+	public BoardVo selectOne(int bno) throws Exception{
 		return boardDao.selectOne(bno);
 	}
-	
 	@Transactional // 바로 밑에있는 메소드 하나에만 영향을 줌 
 	public int insert(BoardVo vo) throws Exception{
 		BoardVo returnVo = boardDao.insert(vo);
@@ -29,8 +28,7 @@ public class BoardService {
 			System.out.println("-------- insert 실패! --------");
 		}
 		return result;
-	}
-	
+	}	
 	public int update(BoardVo vo) throws Exception{
 		return boardDao.update(vo);
 	}
