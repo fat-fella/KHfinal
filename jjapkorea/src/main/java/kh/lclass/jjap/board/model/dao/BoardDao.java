@@ -15,7 +15,7 @@ public class BoardDao {
 	public List<BoardVo> selectList() throws Exception{ 
 		return sqlSession.selectList("board.selectList");
 	}
-	public BoardVo selectOne(Integer bno) throws Exception{
+	public BoardVo selectOne(int bno) throws Exception{
 		return sqlSession.selectOne("board.selectOne", bno);
 	}
 	// insert 시 selectKey를 이용해 PK 값이 추가되어있는 자료형

@@ -16,6 +16,9 @@
 	</insert>
 	
 	<update id="update" parameterType="BoardVo">
-		update board set btitle=#{btitle}, bcontent=#{bcontent} where bno=#{bno}
+		update BOARD set 
+				btitle=#{btitle}, 
+				bcontent=#{bcontent}
+				 	where bno=#{bno}
 	</update>
 </mapper>
