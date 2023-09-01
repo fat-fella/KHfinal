@@ -1,11 +1,18 @@
 package kh.lclass.jjap.board.model.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,6 +37,21 @@ public class BoardController {
 		mv.setViewName("board/get"); // http://localhost:8090/jjap/board/get?bno=3
 		return mv;
 	}
+	
+	@PostMapping("/delete")
+	@ResponseBody
+	public Integer delete(int bno) {
+		Integer result = 0;
+		try {
+			result = boardService.delete(bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = -1;
+		}
+		return result;
+		
+		//return result;
+	}
 	@GetMapping("/insert")
 	public String insert() {
 		String viewPage = "board/insert";
@@ -44,22 +66,23 @@ public class BoardController {
 	    try {
 	        result = boardService.insert(vo);
 	        if (result < 1) {
-	            redirectAttr.addFlashAttribute("msg", "글 등록에 실패했습니다. 다시 입력해세요.");
+	            redirectAttr.addFlashAttribute("msg1", "글 등록에 실패했습니다. 다시 입력해주세요.");
 	            viewPage = "redirect:/board/insert";
 	        } else {
-	            redirectAttr.addFlashAttribute("msg", "글 등록되었습니다.");
+	            redirectAttr.addFlashAttribute("msg1", "글 등록되었습니다.");
 	            viewPage = "redirect:/board/list";
 	        }
 	    } catch (Exception e) {
 	    	e.printStackTrace();
-	        redirectAttr.addFlashAttribute("msg", "예기치 못한 오류로 글 등록에 실패했습니다. 다시 시도해주세요.");
+	        redirectAttr.addFlashAttribute("msg1", "예기치 못한 오류로 글 등록에 실패했습니다. 다시 시도해주세요.");
 	        viewPage = "redirect:/board/insert";
 	    }
 	    return viewPage;
 	}
 	@GetMapping("/update")
-	public String update(Model model, BoardVo vo) throws Exception{
-		model.addAttribute("dto", boardService.update(vo));
+	public String update(Model model, int bno) throws Exception{
+		BoardVo vo = boardService.selectOne(bno); // 글 정보를 가져옴
+        model.addAttribute("dto", vo);
 	    return "board/update";
 	}
 	@PostMapping("/update")
@@ -69,17 +92,18 @@ public class BoardController {
 	    try {
 	        result = boardService.update(vo);
 	        if (result < 1) {
-	            redirectAttr.addFlashAttribute("msg", "글 수정에 실패했습니다. 다시 입력해세요.");
-	            viewPage = "redirect:/board/update";
+	            redirectAttr.addFlashAttribute("msg2", "글 수정에 실패했습니다. 다시 시도해주세요.");
+	            viewPage = "redirect:/board/get?bno="+vo.getBno();
 	        } else {
-	            redirectAttr.addFlashAttribute("msg", "글 수정되었습니다.");
-	            viewPage = "redirect:/board/get";
+	            redirectAttr.addFlashAttribute("msg2", "글 수정되었습니다.");
+	            viewPage = "redirect:/board/get?bno="+vo.getBno();
 	        }
 	    } catch (Exception e) {
-	        redirectAttr.addFlashAttribute("msg", "<<예기치 못한 오류로 글 수정에 실패했습니다.>>");
+	        redirectAttr.addFlashAttribute("msg2", "예기치 못한 오류로 글 수정에 실패했습니다.");
 	        e.printStackTrace();
-	        viewPage = "redirect:/board/get";
+	        viewPage = "redirect:/board/list";
 	    }
 	    return viewPage;
 	}	
+
 }

@@ -25,7 +25,7 @@ public class BoardService {
 		BoardVo returnVo = boardDao.insert(vo);
 		int result = returnVo.getBno();
 		return result;
-	}	
+	}
 	public int update(BoardVo vo) throws Exception{
 		return boardDao.update(vo);
 	}

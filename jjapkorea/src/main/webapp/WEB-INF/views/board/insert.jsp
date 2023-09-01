@@ -63,7 +63,7 @@
 </head>
 <body>
 <script>
-	var msg = '${msg}';
+	var msg = '${msg1}';
 	if(msg){
 		alert(msg);
 	}

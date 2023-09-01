@@ -20,8 +20,8 @@
     }
 
     form {
-        max-width: 600px;
-        margin: 0 auto;
+        max-width: 800px;
+        margin: 20px auto;
         padding: 20px;
         background: #fff;
         border: 1px solid #ddd;
@@ -56,14 +56,9 @@
 </style>
 </head>
 <body>
-<script>
-	var msg = '${msg}';
-	if(msg){
-		alert(msg);
-	}
-</script>
 <h2>글 수정</h2>
 <form action="${pageContext.request.contextPath }/board/update" method="post">
+	<input type="hidden" name="bno" value="${dto.bno}">
     제목: <input type="text" name="btitle" value="${dto.btitle}">
     <br>
     내용: <textarea rows="10" cols="50" name="bcontent">${dto.bcontent}</textarea>
@@ -71,11 +66,19 @@
     <input type="submit" value="수정">
     <button type="button" id="btn-board-list">메인으로</button>
 </form>
+[[
+${dto }
+]] 
 
 <script>   
-$("#btn-board-list").click(function(){
-    location.href="${pageContext.request.contextPath}/board/list";
-});    
+	$("#btn-board-list").click(function(){
+	    location.href="${pageContext.request.contextPath}/board/list";
+	});    
+
+	var msg = '${msg2}';
+	if (msg) {
+	    alert(msg);
+	}
 </script>
 </body>
 </html>

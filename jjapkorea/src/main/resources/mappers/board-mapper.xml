@@ -4,6 +4,7 @@
 	<select id="selectList" resultType="BoardVo">
 		select * from board
 	</select>
+	
 	<select id="selectOne" resultType="BoardVo" parameterType="_int">
 		select * from board where bno=#{bno} order by BREF desc
 	</select>
@@ -16,9 +17,10 @@
 	</insert>
 	
 	<update id="update" parameterType="BoardVo">
-		update BOARD set 
-				btitle=#{btitle}, 
-				bcontent=#{bcontent}
-				 	where bno=#{bno}
+		update BOARD set btitle=#{btitle}, bcontent=#{bcontent} where bno=#{bno}
 	</update>
+	
+	<delete id="delete" parameterType="_int">
+		delete from board where bno=#{bno}
+	</delete>
 </mapper>
