@@ -85,20 +85,18 @@ button:hover {
 					<textarea id="bcontent" rows="10" cols="50" name="bcontent"
 						readonly>${bvo.bcontent}</textarea>
 					<br>
+					<a href="${pageContext.request.contextPath}/board/list">
 					<button type="submit" id="btn-board-update">글 수정</button>
+					</a>
 					<button type="button" id="btn-board-delete">글 삭제</button>
-					<button type="button" id="btn-board-list">글 목록으로 이동</button>
+					<a href="${pageContext.request.contextPath}/board/list">
+					  <button type="button">글 목록으로 이동</button>
+					</a>				
 				</form>
 			</div>
 		</div>
 	</div>
 	<script>
-    $("#btn-board-list").click(function () {
-      location.href = "${pageContext.request.contextPath}/board/list";
-    });
-    $("#btn-board-update").click(function () {
-      location.href = "${pageContext.request.contextPath}/board/update?bno=${bvo.bno}";
-    });
     $("#btn-board-delete").click(function () {
         var bno = '${bvo.bno}';
         if (confirm("글 삭제하시겠습니까?")) {

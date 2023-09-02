@@ -77,12 +77,30 @@
 		<input type="file" name="uploadFile1">
         <input type="checkbox" name="hobby" value="a">삼겹살?<br>
         <button type="submit" id="btn-board-insert">글 등록</button>
-	    <button type="button" id="btn-board-list">글목록으로 이동</button>
+		<a href="${pageContext.request.contextPath}/board/list">
+			<button type="button">글 목록으로 이동</button>
+		</a>	
     </form>
 </div>
 <script>
-	$("#btn-board-list").click(function(){
-		location.href="${pageContext.request.contextPath}/board/list";
+	$("#btn-board-insert").click(function(){
+        var bno = '${bno}';
+        if (confirm("글 등록하시겠습니까?")) {
+          $.ajax({
+            type: "post",
+            url: "${pageContext.request.contextPath}/board/insert",
+            data: { bno: bno },
+            success: function (response) {
+            	console.log(response);
+	            if(response > 0){
+	            	alert("등록되었습니다.");
+	            }else {
+	            	alert("등록에 실패했습니다");
+	            }
+				location.href = "${pageContext.request.contextPath}/board/list";
+				}
+			});
+		}
 	});
 </script>
 </body>

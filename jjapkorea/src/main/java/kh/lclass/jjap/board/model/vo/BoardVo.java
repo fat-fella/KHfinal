@@ -17,4 +17,6 @@ public class BoardVo {
 	private int breLevel;
 	private int breStep;
 
+	
+	
 }
