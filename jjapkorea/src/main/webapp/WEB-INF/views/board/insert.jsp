@@ -83,25 +83,30 @@
     </form>
 </div>
 <script>
-	$("#btn-board-insert").click(function(){
-        var bno = '${bno}';
-        if (confirm("글 등록하시겠습니까?")) {
-          $.ajax({
-            type: "post",
+// 버튼 클릭 이벤트 핸들러 등록
+$("#btn-board-insert").click(function() {
+    // 사용자에게 확인 메시지 표시
+    if (confirm("글을 등록하시겠습니까?")) {
+        // Ajax 요청 보내기
+        $.ajax({
+            type: "POST",
             url: "${pageContext.request.contextPath}/board/insert",
-            data: { bno: bno },
-            success: function (response) {
-            	console.log(response);
-	            if(response > 0){
-	            	alert("등록되었습니다.");
-	            }else {
-	            	alert("등록에 실패했습니다");
-	            }
-				location.href = "${pageContext.request.contextPath}/board/list";
-				}
-			});
-		}
-	});
+            dataType: "json",
+            data: { 
+                btitle: btitle,
+                bcontent: bcontent
+            },
+            success: function(response) {
+                if (response.result === "success") {
+                    alert("글 등록되었습니다.");
+                    location.href = "${pageContext.request.contextPath}/board/list";
+                } else {
+                    alert("글 등록에 실패했습니다.");
+                }
+            }
+        });
+    }
+});
 </script>
 </body>
 </html>

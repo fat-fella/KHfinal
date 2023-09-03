@@ -93,6 +93,17 @@ button:hover {
 					  <button type="button">글 목록으로 이동</button>
 					</a>				
 				</form>
+				<form method="post" action="/reply/write">
+					<p>
+					<label>${dvo.mid }</label> <input type="text" name="writer">
+					</p>
+					<p>
+						<textarea rows="5" cols="50" name="content"></textarea>
+					</p>
+					<p>
+						<button type="submit">댓글 작성</button>
+					</p>
+				</form>
 			</div>
 		</div>
 	</div>

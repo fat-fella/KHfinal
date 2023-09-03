@@ -32,6 +32,18 @@ public class BoardController {
 		mv.addObject("bvo", boardService.selectOne(bno));
 		mv.setViewName("board/get"); // http://localhost:8090/jjap/board/get?bno=3
 		return mv;
+	}
+	@PostMapping("insertReply")
+	@ResponseBody
+	public Integer insertReplyDo(BoardVo vo, int nextVal) {
+		   vo.setMid("jiin0960");
+		    Integer result = 0;
+		    try {
+		        result = boardService.insertReply(vo, nextVal);
+		    } catch (Exception e) {
+		    	e.printStackTrace();
+		    }
+		    return result;
 	}	
 	@PostMapping("/delete")
 	@ResponseBody
@@ -62,6 +74,7 @@ public class BoardController {
 	    }
 	    return result;
 	}
+	
 	
 	@GetMapping("/update")
 	public String update(Model model, int bno) throws Exception{

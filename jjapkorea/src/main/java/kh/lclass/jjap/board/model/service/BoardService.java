@@ -1,6 +1,8 @@
 package kh.lclass.jjap.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,11 @@ public class BoardService {
 		int result = returnVo.getBno();
 		return result;
 	}
+	@Transactional
+	public int insertReply(BoardVo vo, int nextVal) throws Exception{
+		return boardDao.insertReply(vo, nextVal);
+	}
+	
 	public int update(BoardVo vo) throws Exception{
 		return boardDao.update(vo);
 	}

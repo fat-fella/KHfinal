@@ -15,6 +15,15 @@
 		</selectKey>
 		insert into BOARD values (#{bno}, #{btitle}, #{bcontent}, default, #{mid},#{bno}, 0,0)
 	</insert>
+	<insert id="insertReply" parameterType="BoardVo">
+		<selectKey keyProperty="bno" resultType="_int" order="BEFORE">
+		select SEQ_BOARD_BNO.nextval nextval from dual
+		</selectKey>
+		insert into BOARD values (#{bno}, #{btitle}, #{bcontent}, default, #{mid}   
+		                          , (select bref from board where bno=#{bno})
+		                          , (select bre_level+1 from board where bno=#{bno})
+		                          , (select bre_step+1 from board where bno=#{bno};
+	</insert>
 	
 	<update id="update" parameterType="BoardVo">
 		update BOARD set btitle=#{btitle}, bcontent=#{bcontent} where bno=#{bno}

@@ -1,6 +1,8 @@
 package kh.lclass.jjap.board.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,15 @@ public class BoardDao {
 		int result = sqlSession.insert("board.insert", vo);
 		return vo;
 	}
+	//답글
+	public int insertReply(BoardVo vo, int nextVal) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vo", vo);
+		map.put("nextVal", nextVal);
+		int result = sqlSession.insert("board.insertReply", map);
+		return result;
+	}
+	
 	public int update(BoardVo vo) throws Exception{
 		return sqlSession.update("board.update", vo);
 	}
