@@ -64,17 +64,6 @@ button:hover {
 <body>
 	<div class="container">
 		<div class="content">
-			<c:choose>
-				<c:when test="${not empty bvo}">
-					<h2>${bvo.bno}번글</h2>
-				</c:when>
-				<c:otherwise>
-					<script>
-            alert("해당하는 글을 읽을 수 없습니다. 다시 글 선택해주세요.");
-            location.href = "${pageContext.request.contextPath}/board/list";
-          </script>
-				</c:otherwise>
-			</c:choose>
 			<div>
 				<form action="${pageContext.request.contextPath }/board/update"
 					method="get">
@@ -93,17 +82,19 @@ button:hover {
 					  <button type="button">글 목록으로 이동</button>
 					</a>				
 				</form>
-				<form method="post" action="/reply/write">
-					<p>
-					<label>${dvo.mid }</label> <input type="text" name="writer">
-					</p>
-					<p>
-						<textarea rows="5" cols="50" name="content"></textarea>
-					</p>
-					<p>
-						<button type="submit">댓글 작성</button>
-					</p>
-				</form>
+			</div>
+		<!-- Comments Form -->
+			<div class="card my-4">
+				<h5 class="card-header">Leave a Comment:</h5>
+				<div class="card-body">
+					<form action="${pageContext.request.contextPath}/board/insertReply" method="post">
+						<div class="form-group">
+							<input type="hidden" name="bno" th:value="*{bno}" />
+							<textarea name="content" class="form-control" rows="3"></textarea>
+						</div>
+						<button type="submit" class="btn-board-comment">댓글 등록</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -127,6 +118,31 @@ button:hover {
 			});
 		}
 	});
+
+    $("#btn-board-comment").click(function() {
+        if (confirm("댓글을 등록하시겠습니까?")) {
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/board/insertReply",
+                dataType: "json",
+                data: { 
+                	bno: parseInt(bno),
+                    btitle: btitle,
+                    bcontent: bcontent
+                },
+                success: function(response) {
+                    if (response.result === "success") {
+                        alert("댓글 등록되었습니다.");
+                        location.href = "${pageContext.request.contextPath}/board/list;
+                    } else {
+                        alert("댓글 등록에 실패했습니다.");
+        				location.href = "${pageContext.request.contextPath}/board/list";
+
+                    }
+                }
+            });
+        }
+    });
 </script>
 </body>
 </html>

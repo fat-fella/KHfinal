@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board">
+<!-- 전체 게시글 -->
 	<select id="selectList" resultType="BoardVo">
 		select * from board
 	</select>
 	
+<!-- 상세 게시글 -->	
 	<select id="selectOne" resultType="BoardVo" parameterType="_int">
 		select * from board where bno=#{bno} order by BREF desc
 	</select>
 	
+<!-- 게시글 등록 -->	
 	<insert id="insert" parameterType="BoardVo">
 		<selectKey keyProperty="bno" resultType="_int" order="BEFORE">
 		select SEQ_BOARD_BNO.nextval nextval from dual
 		</selectKey>
 		insert into BOARD values (#{bno}, #{btitle}, #{bcontent}, default, #{mid},#{bno}, 0,0)
 	</insert>
-	<insert id="insertReply" parameterType="BoardVo">
-		<selectKey keyProperty="bno" resultType="_int" order="BEFORE">
+	
+<!-- 댓글 등록 -->
+ 	<insert id="insertReply" parameterType="BoardVo">
+		<selectKey keyProperty="btitle" resultType="string" order="BEFORE">
 		select SEQ_BOARD_BNO.nextval nextval from dual
 		</selectKey>
 		insert into BOARD values (#{bno}, #{btitle}, #{bcontent}, default, #{mid}   
-		                          , (select bref from board where bno=#{bno})
-		                          , (select bre_level+1 from board where bno=#{bno})
-		                          , (select bre_step+1 from board where bno=#{bno};
+                          , (select bref from board where bno=#{bno})
+                          , (select bre_level+1 from board where bno=#{bno})
+                          , (select bre_step+1 from board where bno=#{bno}))
 	</insert>
-	
+	 
+<!-- 댓글 목록 -->
+	<select id="selectCommentList" resultType="BoardVo">
+		select * from BOARD where bno = #{bno}
+	</select>
+<!-- 글 수정 -->	
 	<update id="update" parameterType="BoardVo">
 		update BOARD set btitle=#{btitle}, bcontent=#{bcontent} where bno=#{bno}
 	</update>
-	
+<!-- 글 삭제 -->	
 	<delete id="delete" parameterType="_int">
 		delete from board where bno=#{bno}
 	</delete>

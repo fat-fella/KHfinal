@@ -27,12 +27,13 @@ public class BoardDao {
 		return vo;
 	}
 	//답글
-	public int insertReply(BoardVo vo, int nextVal) throws Exception{
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("vo", vo);
-		map.put("nextVal", nextVal);
-		int result = sqlSession.insert("board.insertReply", map);
-		return result;
+	public BoardVo insertReply(BoardVo vo) throws Exception{
+		int result = sqlSession.insert("board.insertReply", vo);
+		return vo;
+	}
+	
+	public List<BoardVo> selectCommentList(BoardVo vo) throws Exception{
+		return sqlSession.selectList("board.insertReply", vo);
 	}
 	
 	public int update(BoardVo vo) throws Exception{

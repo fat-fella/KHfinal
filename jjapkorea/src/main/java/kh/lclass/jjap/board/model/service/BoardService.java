@@ -28,9 +28,13 @@ public class BoardService {
 		int result = returnVo.getBno();
 		return result;
 	}
-	@Transactional
-	public int insertReply(BoardVo vo, int nextVal) throws Exception{
-		return boardDao.insertReply(vo, nextVal);
+	
+	public BoardVo insertReply(BoardVo vo) throws Exception{
+		return boardDao.insertReply(vo);
+	}
+	
+	public List<BoardVo> selectCommentList(BoardVo vo) throws Exception{
+		return boardDao.selectCommentList(vo);
 	}
 	
 	public int update(BoardVo vo) throws Exception{

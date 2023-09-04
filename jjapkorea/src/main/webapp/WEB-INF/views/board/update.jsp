@@ -74,11 +74,6 @@ ${dto }
 	$("#btn-board-list").click(function(){
 	    location.href="${pageContext.request.contextPath}/board/list";
 	});    
-
-	var msg = '${msg2}';
-	if (msg) {
-	    alert(msg);
-	}
 </script>
 </body>
 </html>

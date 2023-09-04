@@ -62,12 +62,6 @@
 </style>
 </head>
 <body>
-<script>
-	var msg = '${msg1}';
-	if(msg){
-		alert(msg);
-	}
-</script>
 <div>
     <form action="${pageContext.request.contextPath }/board/insert" method="post" enctype="multipart/form-data" >
         제목: <input type="text" name="btitle">
@@ -83,11 +77,8 @@
     </form>
 </div>
 <script>
-// 버튼 클릭 이벤트 핸들러 등록
 $("#btn-board-insert").click(function() {
-    // 사용자에게 확인 메시지 표시
     if (confirm("글을 등록하시겠습니까?")) {
-        // Ajax 요청 보내기
         $.ajax({
             type: "POST",
             url: "${pageContext.request.contextPath}/board/insert",
