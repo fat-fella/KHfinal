@@ -21,7 +21,7 @@
 	
 <!-- 댓글 등록 -->
  	<insert id="insertReply" parameterType="BoardVo">
-		<selectKey keyProperty="btitle" resultType="string" order="BEFORE">
+		<selectKey keyProperty="bno" resultType="_int" order="BEFORE">
 		select SEQ_BOARD_BNO.nextval nextval from dual
 		</selectKey>
 		insert into BOARD values (#{bno}, #{btitle}, #{bcontent}, default, #{mid}   
@@ -34,10 +34,12 @@
 	<select id="selectCommentList" resultType="BoardVo">
 		select * from BOARD where bno = #{bno}
 	</select>
+	
 <!-- 글 수정 -->	
 	<update id="update" parameterType="BoardVo">
 		update BOARD set btitle=#{btitle}, bcontent=#{bcontent} where bno=#{bno}
 	</update>
+	
 <!-- 글 삭제 -->	
 	<delete id="delete" parameterType="_int">
 		delete from board where bno=#{bno}

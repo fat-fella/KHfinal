@@ -38,11 +38,11 @@ public class BoardController {
 	}
 
 	@GetMapping("commentList")
-	@ResponseBody
-	public List<BoardVo> CommentList(@RequestParam("bno") int bno) throws Exception{
-		BoardVo vo = new BoardVo();
-		vo.setBno(bno);
-		return boardService.selectCommentList(vo);
+	public ModelAndView CommentList(ModelAndView mv, BoardVo vo) throws Exception{
+		mv.addObject("bct", boardService.selectCommentList(vo));
+		mv.setViewName("board/commentList");
+		return mv;
+		
 	}
 	
 	@PostMapping("/delete")
@@ -76,9 +76,9 @@ public class BoardController {
 	}
 	@PostMapping("/insertReply")
 	@ResponseBody
-	public String insertReply(BoardVo vo, @RequestParam("bno") int bno, @RequestParam("btitle") String btitle, @RequestParam("bcontent") String bcontent){
+	public Integer insertReply(BoardVo vo, @RequestParam("bno") int bno){
 		vo.setMid("jiin0960");
-		String result = null;
+		Integer result = null;
 		try {
 			boardService.insertReply(vo);
 		} catch (Exception e) {

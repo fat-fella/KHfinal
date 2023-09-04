@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -83,13 +82,23 @@ button:hover {
 					</a>				
 				</form>
 			</div>
+			<ul>
+				<c:forEach items="${bvo }" var="commentList">
+					<li>
+						<div>
+							<p>${bvo.mid } / ${bvo.bwriteDate }</p> 
+							<p>${bvo.bcontent }</p>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
 		<!-- Comments Form -->
 			<div class="card my-4">
 				<h5 class="card-header">Leave a Comment:</h5>
 				<div class="card-body">
-					<form action="${pageContext.request.contextPath}/board/insertReply" method="post">
+					<form action="${pageContext.request.contextPath}/board/insertReply" method="post" enctype="multipart/form-data">
 						<div class="form-group">
-							<input type="hidden" name="bno" th:value="*{bno}" />
+							<input type="hidden" name="bno" value="${bvo.bno}"/>
 							<textarea name="content" class="form-control" rows="3"></textarea>
 						</div>
 						<button type="submit" class="btn-board-comment">댓글 등록</button>
@@ -120,18 +129,19 @@ button:hover {
 	});
 
     $("#btn-board-comment").click(function() {
+    	var bno = '${bvo.bno}';
         if (confirm("댓글을 등록하시겠습니까?")) {
             $.ajax({
                 type: "POST",
                 url: "${pageContext.request.contextPath}/board/insertReply",
                 dataType: "json",
                 data: { 
-                	bno: parseInt(bno),
+                	bno: bno,
                     btitle: btitle,
                     bcontent: bcontent
                 },
                 success: function(response) {
-                    if (response.result === "success") {
+                    if (response > 0) {
                         alert("댓글 등록되었습니다.");
                         location.href = "${pageContext.request.contextPath}/board/list;
                     } else {

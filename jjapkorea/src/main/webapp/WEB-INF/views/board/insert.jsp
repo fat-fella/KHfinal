@@ -88,11 +88,12 @@ $("#btn-board-insert").click(function() {
                 bcontent: bcontent
             },
             success: function(response) {
-                if (response.result === "success") {
+                if (response > 0) {
                     alert("글 등록되었습니다.");
                     location.href = "${pageContext.request.contextPath}/board/list";
                 } else {
                     alert("글 등록에 실패했습니다.");
+                    location.href = "${pageContext.request.contextPath}/board/list";
                 }
             }
         });
